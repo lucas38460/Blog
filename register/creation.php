@@ -21,14 +21,16 @@
             $resultat = $base->prepare($sql);
             $resultat->execute(array('identifiant' => $_POST['identifiant']));
             // Si le compte existe déjà (a été créé aumoins)
-            if ($resultat->rowCount() == 1) {
+            if ($resultat->rowCount() > 0) {
                 header("Location:index.php?Login=existant");
             } else {
                 // Creation du compte puisqu'il n'existe pas
                 $sql_create = "INSERT INTO login (`id`, `identifiant`, `password`, `role`) VALUES (:id ,:identifiant, :password, :role)";
                 $resultat2 = $base->prepare($sql_create);
                 $resultat2->execute(array('id' => uniqid(), 'identifiant' => htmlentities($_POST['identifiant']), 'password' => htmlentities(hash("sha256", $_POST['password'])), 'role' => "user"));
-                header("Location:../login/affichage.php");
+                $_SESSION['pseudo'] = $_POST['identifiant'];
+                $_SESSION['droit'] = $resultat->fetch()['role'];
+                header("Location:../page/affichage.php");
             }
             $resultat->closeCursor();
         } catch (Exception $e) {

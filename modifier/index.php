@@ -46,7 +46,7 @@
             //  Information pour l'utilisateur
             echo '<p>Si vous voulez changer l\'image</p>';
             // Image a modifier du blog
-            echo '<input type="file" name="imgmodify">';
+            echo '<input type="file" name="imgmodify" required>';
             // Saut de ligne
             echo '<br>';
             // Bouton pour envoyer le formulaire

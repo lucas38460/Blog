@@ -35,14 +35,16 @@
                 $date = date_format(date_create($ligne['Date']), 'd-m-Y H:i:s');
 
                 echo '<p>Titre: ' . $ligne['Title'] . '</p>' .
-                    '<p>Date: ' . $date . '</p>' .
                     '<p>Commentaire: ' . $ligne['Comment'] . '</p>' .
+                    '<p>Date: ' . $date . '</p>' .
                     '<img src="../img/' . $ligne['image'] . '">';
+
                 if (isset($_SESSION['pseudo'])) {
                     if ($_SESSION['pseudo'] == $ligne['Author'] || $_SESSION['droit'] === "admin") {
                         echo '<br> <a id="espacement" href="../modifier/index.php?id=' . $ligne['Id'] . '">Modifier</a>';
                         echo '<a href="../supprimer/index.php?id=' . $ligne['Id'] . '">Supprimer</a>';
                     }
+                    echo '<div id="commentaires"></div>';
                 }
             }
         } else {
