@@ -22,9 +22,11 @@
             $resultat->execute(array('Identifiant' => htmlentities($_POST['Identifiant']), 'Password' =>  htmlentities(hash("sha256", $_POST['Password']))));
             // Si le compte existe et n'est pas en double
             if ($resultat->rowCount() == 1) {
+                // On met dans la sessuon l'identifiant de la personne et ses droit
                 $_SESSION['pseudo'] = $_POST['Identifiant'];
                 $_SESSION['droit'] = $resultat->fetch()['role'];
-                header("Location:../page/index.php");
+                // Puis est redirigé sur la page des posts
+                header("Location:../page/affichage.php");
             }
             // Sinon Renvoie que le login est incorrect
             else {

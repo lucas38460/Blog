@@ -16,6 +16,7 @@
         header("Location:../login/index.php");
     }
 
+    //  
     // Lire les donnés pour les afficher dans la page de modification
     try {
         $base = new PDO('mysql:host=127.0.0.1;dbname=blog', 'root', '');
@@ -25,10 +26,31 @@
         $resultat = $base->prepare($sql);
         $resultat->execute(array('id' => $_SESSION['id']));
         while ($ligne = $resultat->fetch()) {
-            echo '<p>Ancien titre:' . $ligne['Title'] . "</p>";
-            echo '<p>Ancien commentaire:' . $ligne['Comment'] . "</p>";
-            echo '<p>Ancienne image:</p>" <br>';
-            echo "<img src='../img/" . $ligne['image'] . "'>" . '<br />';
+            // Redirection sur le blog
+            echo '<form action="traitement.php" method="post" enctype="multipart/form-data">';
+            //  Titre a modifier de la publication
+            echo '<label for="title" value="' . $ligne['Title'] . '">Nouveau Titre :
+                <input type="text" name="title" id="title">
+            </label>';
+            // Saut de ligne
+            echo '<br>';
+            // Commentaire a modifier de la publication
+            echo '<label for="commentmodify" placeholder="' . $ligne['Comment'] . '">Nouveau Commentaire:</label> <br>
+            <textarea id="commentmodify" name="commentmodify" rows="5" cols="33" required></textarea>';
+            // Saut de ligne
+            echo '<br>';
+            // Image du blog
+            echo "<img src='../img/" . $ligne['image'] . "'>";
+            // Saut de ligne
+            echo '<br>';
+            //  Information pour l'utilisateur
+            echo '<p>Si vous voulez changer l\'image</p>';
+            // Image a modifier du blog
+            echo '<input type="file" name="imgmodify" required>';
+            // Saut de ligne
+            echo '<br>';
+            echo '    <a href="../page/affichage.php">Arrêter les modifications sans enregistrer</a>
+            </form>';
         }
         $resultat->closeCursor();
     } catch (Exception $e) {
@@ -36,29 +58,6 @@
         die('Erreur : ' . $e->getMessage());
     }
     ?>
-    <!-- Redirection sur le blog -->
-    <form action="traitement.php" method="post" enctype="multipart/form-data">
-        <!-- Titre a modifier de la publication -->
-        <label for="title">Nouveau Titre :
-            <input type="text" name="title" id="title" required>
-        </label>
-        <br>
-        <!-- Commentaire a modifier de la publication -->
-        <label for="commentmodify">Nouveau Commentaire:</label> <br>
-        <textarea id="commentmodify" name="commentmodify" rows="5" cols="33" required></textarea>
-        <br>
-        <!-- Image a modifier du blog -->
-        <input type="file" name="imgmodify" required>
-        <br>
-        <button type="submit">Remplacer</button>
-        <br>
-        <a href='../page/affichage.php'>Arrêter les modifications sans enregistrer</a>
-    </form>
 </body>
-<style>
-    img {
-        max-width: 200px;
-    }
-</style>
 
 </html>

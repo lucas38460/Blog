@@ -18,9 +18,7 @@ if (isset($_POST['title'])) {
         $resultat = $base->prepare($sql);
         $resultat->execute(array('newcomment' => htmlentities($_POST['commentmodify']), 'newtitle' => htmlentities($_POST['title']), 'newimage' => $img_name, 'id' => $_SESSION['id']));
         unset($_SESSION['id']);
-        echo "post modifié.";
-        echo "<br>";
-        echo "<a href ='../page/affichage.php'>Voir les modifications</a>";
+        header("Location:../page/affichage.php");
         $resultat->closeCursor();
     } catch (Exception $e) {
         // message en cas d’erreur

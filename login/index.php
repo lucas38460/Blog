@@ -28,8 +28,6 @@
         // Si il n'y est pas
         if (isset($_GET['Login']) && $_GET['Login'] === "incorrect") {
             echo "<p>Login incorrect ou innexistant</p>";
-        } else if (isset($_GET['compte'])  && $_GET['compte'] === "creer") {
-            echo "<p>Votre compte a bien été créé</p>";
         }
         ?>
 </body>

@@ -28,7 +28,7 @@
                 $sql_create = "INSERT INTO login (`id`, `identifiant`, `password`, `role`) VALUES (:id ,:identifiant, :password, :role)";
                 $resultat2 = $base->prepare($sql_create);
                 $resultat2->execute(array('id' => uniqid(), 'identifiant' => htmlentities($_POST['identifiant']), 'password' => htmlentities(hash("sha256", $_POST['password'])), 'role' => "user"));
-                header("Location:../login/index.php?compte=creer");
+                header("Location:../login/affichage.php");
             }
             $resultat->closeCursor();
         } catch (Exception $e) {
