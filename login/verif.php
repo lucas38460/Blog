@@ -1,5 +1,4 @@
 <?php session_start() ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,6 +23,7 @@
             // Si le compte existe et n'est pas en double
             if ($resultat->rowCount() == 1) {
                 $_SESSION['pseudo'] = $_POST['Identifiant'];
+                $_SESSION['droit'];
                 header("Location:../page/index.php");
             }
             // Sinon Renvoie que le login est incorrect
