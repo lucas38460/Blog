@@ -32,8 +32,10 @@
         if ($resultat->rowCount() > 0) {
             // Tant qu'il y en a on les récupère puis les affichent
             while ($ligne = $resultat->fetch()) {
+                $date = date_format(date_create($ligne['Date']), 'd-m-Y H:i:s');
+
                 echo '<p>Titre: ' . $ligne['Title'] . '</p>' .
-                    '<p>Date: ' . $ligne['Date'] . '</p>' .
+                    '<p>Date: ' . $date . '</p>' .
                     '<p>Commentaire: ' . $ligne['Comment'] . '</p>' .
                     '<img src="../img/' . $ligne['image'] . '">';
                 if (isset($_SESSION['pseudo'])) {

@@ -29,14 +29,14 @@
             // Redirection sur le blog
             echo '<form action="traitement.php" method="post" enctype="multipart/form-data">';
             //  Titre a modifier de la publication
-            echo '<label for="title" value="' . $ligne['Title'] . '">Nouveau Titre :
-                <input type="text" name="title" id="title">
+            echo '<label for="title">Nouveau Titre :
+                <input type="text" name="title" id="title" value="' . $ligne['Title'] . '">
             </label>';
             // Saut de ligne
             echo '<br>';
             // Commentaire a modifier de la publication
-            echo '<label for="commentmodify" placeholder="' . $ligne['Comment'] . '">Nouveau Commentaire:</label> <br>
-            <textarea id="commentmodify" name="commentmodify" rows="5" cols="33" required></textarea>';
+            echo '<label for="commentmodify">Nouveau Commentaire:</label> <br>
+            <textarea id="commentmodify" name="commentmodify" rows="5" cols="33">' . $ligne['Comment'] . '</textarea>';
             // Saut de ligne
             echo '<br>';
             // Image du blog
@@ -46,11 +46,16 @@
             //  Information pour l'utilisateur
             echo '<p>Si vous voulez changer l\'image</p>';
             // Image a modifier du blog
-            echo '<input type="file" name="imgmodify" required>';
+            echo '<input type="file" name="imgmodify">';
             // Saut de ligne
             echo '<br>';
-            echo '    <a href="../page/affichage.php">Arrêter les modifications sans enregistrer</a>
-            </form>';
+            // Bouton pour envoyer le formulaire
+            echo '<button type="submit">Modifier</button>';
+            //  Fin de formulaire
+            echo '</form>';
+            // Saut de ligne
+            echo '<br>';
+            echo '<a href="../page/affichage.php">Arrêter les modifications sans enregistrer</a>';
         }
         $resultat->closeCursor();
     } catch (Exception $e) {
@@ -59,5 +64,10 @@
     }
     ?>
 </body>
+<style>
+    img {
+        max-width: 200px;
+    }
+</style>
 
 </html>
