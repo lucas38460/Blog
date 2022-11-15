@@ -19,11 +19,11 @@
             $sql = "SELECT * FROM login WHERE Identifiant = :Identifiant AND Password = :Password";
             // Préparation de la requête avec les marqueurs
             $resultat = $base->prepare($sql);
-            $resultat->execute(array('Identifiant' => $_POST['Identifiant'], 'Password' =>  htmlentities(hash("sha256", $_POST['Password']))));
+            $resultat->execute(array('Identifiant' => htmlentities($_POST['Identifiant']), 'Password' =>  htmlentities(hash("sha256", $_POST['Password']))));
             // Si le compte existe et n'est pas en double
             if ($resultat->rowCount() == 1) {
                 $_SESSION['pseudo'] = $_POST['Identifiant'];
-                $_SESSION['droit'];
+                $_SESSION['droit'] = $resultat->fetch()['role'];
                 header("Location:../page/index.php");
             }
             // Sinon Renvoie que le login est incorrect

@@ -16,7 +16,7 @@ if (isset($_POST['title'])) {
         $sql = "UPDATE post SET Comment = :newcomment, Title = :newtitle, image = :newimage WHERE Id = :id";
         // Préparation de la requête avec les marqueurs
         $resultat = $base->prepare($sql);
-        $resultat->execute(array('newcomment' => $_POST['commentmodify'], 'newtitle' => $_POST['title'], 'newimage' => $img_name, 'id' => $_SESSION['id']));
+        $resultat->execute(array('newcomment' => htmlentities($_POST['commentmodify']), 'newtitle' => htmlentities($_POST['title']), 'newimage' => $img_name, 'id' => $_SESSION['id']));
         unset($_SESSION['id']);
         echo "post modifié.";
         echo "<br>";

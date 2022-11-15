@@ -28,7 +28,7 @@
         <textarea id="comment" name="comment" rows="5" cols="33" required></textarea>
         <br>
         <!-- Image du blog -->
-        <input type="file" name="img">
+        <input type="file" name="img" required>
         <button type="submit">Envoyer</button>
         <br>
         <a href='./logout.php'>Se déconnecter</a>

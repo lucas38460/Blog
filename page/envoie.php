@@ -26,10 +26,10 @@
     try {
         $base = new PDO('mysql:host=127.0.0.1;dbname=blog', 'root', '');
         $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO post (Date, Comment, Title, image, Author) VALUES (:date, :comment, :title, :image, :Author)";
+        $sql = "INSERT INTO post (Id, Date, Comment, Title, image, Author) VALUES (:id, :date, :comment, :title, :image, :Author)";
         // Préparation de la requête avec les marqueurs
         $resultat = $base->prepare($sql);
-        $resultat->execute(array('date' => date('Y-m-d H:i:s'), 'comment' => $_POST['comment'], 'title' => $_POST['title'], 'image' => $img_name, 'Author' => $_SESSION['pseudo']));
+        $resultat->execute(array('id' => uniqid(), 'date' => date('Y-m-d H:i:s'), 'comment' => htmlentities($_POST['comment']), 'title' => htmlentities($_POST['title']), 'image' => $img_name, 'Author' => $_SESSION['pseudo']));
         $resultat->closeCursor();
         // Redirection vers le blog après l'envoie du post
         header("Location:affichage.php");

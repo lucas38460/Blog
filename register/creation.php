@@ -25,9 +25,9 @@
                 header("Location:index.php?Login=existant");
             } else {
                 // Creation du compte puisqu'il n'existe pas
-                $sql_create = "INSERT INTO login (`id`, `identifiant`, `password`) VALUES (:id ,:identifiant, :password)";
+                $sql_create = "INSERT INTO login (`id`, `identifiant`, `password`, `role`) VALUES (:id ,:identifiant, :password, :role)";
                 $resultat2 = $base->prepare($sql_create);
-                $resultat2->execute(array('id' => uniqid(), 'identifiant' => $_POST['identifiant'], 'password' => hash("sha256", $_POST['password'])));
+                $resultat2->execute(array('id' => uniqid(), 'identifiant' => htmlentities($_POST['identifiant']), 'password' => htmlentities(hash("sha256", $_POST['password'])), 'role' => "user"));
                 header("Location:../login/index.php?compte=creer");
             }
             $resultat->closeCursor();

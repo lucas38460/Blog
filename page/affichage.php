@@ -37,7 +37,7 @@
                     '<p>Commentaire: ' . $ligne['Comment'] . '</p>' .
                     '<img src="../img/' . $ligne['image'] . '">';
                 if (isset($_SESSION['pseudo'])) {
-                    if ($_SESSION['pseudo'] == $ligne['Author']) {
+                    if ($_SESSION['pseudo'] == $ligne['Author'] || $_SESSION['droit'] === "admin") {
                         echo '<br> <a id="espacement" href="../modifier/index.php?id=' . $ligne['Id'] . '">Modifier</a>';
                         echo '<a href="../supprimer/index.php?id=' . $ligne['Id'] . '">Supprimer</a>';
                     }
