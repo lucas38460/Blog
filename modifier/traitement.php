@@ -19,7 +19,7 @@ if (isset($_FILES['imgmodify'])) {
         $resultat->execute(array('newcomment' => htmlentities($_POST['commentmodify']), 'newtitle' => htmlentities($_POST['title']), 'newimage' => $img_name, 'id' => $_SESSION['id']));
         unset($_SESSION['id']);
         // Suppression de l'image de base dans les fichiers
-        unlink('../img/' . $_['']);
+        // unlink('../img/' . $_['']);
         header("Location:../page/affichage.php");
         $resultat->closeCursor();
     } catch (Exception $e) {
