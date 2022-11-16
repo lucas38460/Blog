@@ -51,7 +51,7 @@
                         echo '<br> <a id="espacement" href="../modifier/index.php?id=' . $ligne['Id'] . '">Modifier</a>';
                         echo '<a href="../supprimer/index.php?id=' . $ligne['Id'] . '">Supprimer</a>';
                     }
-                    echo '<div id="commentaires"><form action="./commentaires\traitement_commentaire.php" method="post">
+                    echo '<div id="commentaires"><form action="./commentaires\traitement_commentaire.php?id=' . $ligne['id'] . '" method="post">
                     <label for="commentaire">
                         Commentaire :<input type="text" name="commentaire" id="commentaire" required>
                     </label>
